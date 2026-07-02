@@ -34,3 +34,14 @@
 - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
 - **Date:** 2026-07-02
 - **One thing I learned:** How to collaborate on an Open Source Project.
+
+
+## Oluwasegun Michael Adesiyan
+
+- **GitHub:** @Segzymike
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2026-07-02
+- **One thing I learned:** I learned how Git branches allow developers to work independently without affecting the main project.
+
+
+
