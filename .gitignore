@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# node_modules/
+# dist/
+# .env
+# .env.local
+# .DS_Store
+# *.log
+# coverage/
+# .next/
