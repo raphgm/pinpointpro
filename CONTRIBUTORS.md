@@ -5,10 +5,13 @@
 - **Date:** 2026-07-02
 - **One thing I learned:** I learned how to clone a repository.
 
-## Forsyth Famous
 
-# \- **GitHub:** @ForsythFamous
 
+## samuel eze
+# - **GitHub:** @sammiehigh5
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** 2026-06-28
+# - **One thing I learned:** i love devops
 # \- **Contribution:** Cloud \& DevOps Foundation – Phase 2 Project
 
 # \- **Date:** 2026-06-27
@@ -36,12 +39,10 @@
 - **One thing I learned:** How to collaborate on an Open Source Project.
 
 
-## Oluwasegun Michael Adesiyan
 
-- **GitHub:** @Segzymike
-- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
-- **Date:** 2026-07-02
-- **One thing I learned:** Git branches allow developers to work independently without affecting the main project.
-
-
+# ## Suliat Ogungbe
+# - **GitHub:** @suliatmayowaogungbe-glitch
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** 2026-07-02
+# - **One thing I learned:** How to fork and contribute to an open source project on GitHuB.
 

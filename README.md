@@ -5,7 +5,7 @@
 PinPoint Pro is a high-performance, context-aware digital workspace designed for deep work. It transforms your browser or desktop environment into a "pinned" productivity surface, using AI to intelligently manage window layouts, categorise research, and provide semantic search across your entire workspace.
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![Version: 1.0.0-beta](https://img.shields.io/badge/Version-1.0.0--beta-emerald)
+![Version: 1.0.0-beta](https://img.shields.io/badge/Version-1.0.0--beta-green)
 ![AI: Provider Agnostic](https://img.shields.io/badge/AI-Provider%20Agnostic-blueviolet)
 ![Preferred: Azure OpenAI](https://img.shields.io/badge/Preferred-Azure%20OpenAI-0078D4?logo=microsoft-azure)
 
@@ -56,7 +56,7 @@ PinPoint Pro follows the **Invincible UI** framework:
 
 ### Prerequisites
 - An API key from your chosen AI provider. We recommend **Azure OpenAI** — sign up at [azure.microsoft.com](https://azure.microsoft.com/en-us/products/ai-services/openai-service).
-- A modern browser with ES6 module support.
+- A modern browser with ES6 module support (such as the latest versions of Google Chrome, Microsoft Edge, Mozilla Firefox, or Safari).
 
 ### Supported AI Providers
 PinPoint Pro works with any OpenAI-compatible API. Set the following environment variables:
