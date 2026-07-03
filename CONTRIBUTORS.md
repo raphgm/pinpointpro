@@ -55,3 +55,11 @@
 # - **Date:** 2026-07-02
 # - **One thing I learned:** How to fork and contribute to an open source project on GitHuB.
 
+
+
+ ## Emmanuel Khalifa
+ - **GitHub:** @Edouble01
+ - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+ - **Date:** 2026-07-03
+ - **One thing I learned:** Learning how to collaborate on GitHub.
+
