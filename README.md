@@ -15,7 +15,7 @@ PinPoint Pro is a high-performance, context-aware digital workspace designed for
 
 ### 🪟 Advanced Window Management
 - **Smart Pinning**: Pin any window to stay on top of your workflow.
-- **Ghosting Mode**: Inactive pinned windows become translucent and grayscale, minimising peripheral distraction while remaining visible.
+- **Ghosting Mode**: Inactive pinned windows become translucent and grayscale, reducing peripheral distractions while maintaining visibility.
 - **Desktop Folders**: Drag and drop windows onto each other to create smart stacks and categorised folders.
 - **Multi-Tab Surfaces**: Browser windows feature a deeply integrated tab architecture, allowing multiple web resources to coexist in a single pinned surface.
 
