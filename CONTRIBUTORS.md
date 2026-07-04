@@ -63,3 +63,11 @@
  - **Date:** 2026-07-03
  - **One thing I learned:** Learning how to collaborate on GitHub.
 
+
+
+## Oluwaloseyi Oluwatofunmi
+
+ - **GitHub:** @oluwaloseyiT
+ - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+ - **Date:** 2026-07-04
+ - **One thing I learned:** I learnt how to contribute on an opensource project.
