@@ -17,7 +17,7 @@ PinPoint Pro is a high-performance, context-aware digital workspace designed for
 - **Smart Pinning**: Pin any window to stay on top of your workflow.
 - **Ghosting Mode**: Inactive pinned windows become translucent and grayscale, minimising peripheral distraction while remaining visible.
 - **Desktop Folders**: Drag and drop windows onto each other to create smart stacks and categorised folders.
-- **Multi-Tab Surfaces**: Browser windows feature a deep-integrated tab architecture, allowing multiple web resources to coexist in a single pinned surface.
+- **Multi-Tab Surfaces**: Browser windows feature a deeply integrated tab architecture, allowing multiple web resources to coexist in a single pinned surface.
 
 ### 🤖 AI-Powered Intelligence
 PinPoint Pro is designed to work with **any AI provider**. We recommend [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) as the preferred provider, but you can plug in any OpenAI-compatible API.
