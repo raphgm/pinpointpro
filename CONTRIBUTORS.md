@@ -69,6 +69,12 @@
  - **Date:** 2026-07-03
  - **One thing I learned:** Learning how to collaborate on GitHub.
 
+## Peter Fadeyi
+
+- **GitHub:** @pirrezz
+- **Contribution:** Cloud & DevOps Foundation - Phase 2 Project
+- **Date:** 2026-07-04
+- **One thing I learned:** Getting started with DevOps.
 
 
 ## Oluwaloseyi Oluwatofunmi
