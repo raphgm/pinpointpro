@@ -69,23 +69,9 @@
  - **Date:** 2026-07-03
  - **One thing I learned:** Learning how to collaborate on GitHub.
 
-## Peter Fadeyi
 
-- **GitHub:** @pirrezz
-- **Contribution:** Cloud & DevOps Foundation - Phase 2 Project
-- **Date:** 2026-07-04
-- **One thing I learned:** Getting started with DevOps.
-
-
-## Oluwaloseyi Oluwatofunmi
-
- - **GitHub:** @oluwaloseyiT
- - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
- - **Date:** 2026-07-04
- - **One thing I learned:** I learnt how to contribute on an opensource project.
-
-# ## Ayoade Oke
-# - **GitHub:** @SethGiddy
+# ## Full Name: Ganiyat Adebayo
+# - **GitHub:** @umuashraf1
 # - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
-# - **Date:** 2026-07-05
-# - **One thing I learned:** This is my first attempt at contributing to open-source project using GitHub workflows, in my Devops and Cloud Engineering learning.
+# - **Date:** 2026-07-5
+# - **One thing I learned:** I am learning how to collaborate on  open source project
