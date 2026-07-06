@@ -75,3 +75,8 @@
 # - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
 # - **Date:** 2026-07-5
 # - **One thing I learned:** I am learning how to collaborate on  open source project
+## Ijeoma Adesiyan
+**GitHub:** @IjeomaAdesiyan-star 
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2026-07-06
+- **One thing I learned:** I now understand that Git branches provide an isolated workspace for developing new features before merging them into the main project.
