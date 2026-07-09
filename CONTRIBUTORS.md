@@ -56,6 +56,10 @@
 # - **One thing I learned:** How to fork and contribute to an open source project on GitHuB.
 
 
+## Lotanna Obianefo
+# - **Contribution:** Cloud & DevOps Foundation - Phase 2 Project
+# - **Date:** 2026-07-07
+# - **One thing I Learnt:** I Learnt how to Fork, Clone and Contribute to an OpenSource Repo.
 
 ## Raphael Olaniyi
 # - **GitHub:** @rolaniyia
