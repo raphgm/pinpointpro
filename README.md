@@ -5,7 +5,7 @@
 PinPoint Pro is a high-performance, context-aware digital workspace designed for deep work. It transforms your browser or desktop environment into a "pinned" productivity surface, using AI to intelligently manage window layouts, categorise research, and provide semantic search across your entire workspace.
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![Version: 1.0.0-beta](https://img.shields.io/badge/Version-1.0.0--beta-emerald)
+![Version: 1.0.0-beta](https://img.shields.io/badge/Version-1.0.0--beta-green)
 ![AI: Provider Agnostic](https://img.shields.io/badge/AI-Provider%20Agnostic-blueviolet)
 ![Preferred: Azure OpenAI](https://img.shields.io/badge/Preferred-Azure%20OpenAI-0078D4?logo=microsoft-azure)
 
@@ -15,9 +15,9 @@ PinPoint Pro is a high-performance, context-aware digital workspace designed for
 
 ### 🪟 Advanced Window Management
 - **Smart Pinning**: Pin any window to stay on top of your workflow.
-- **Ghosting Mode**: Inactive pinned windows become translucent and grayscale, minimising peripheral distraction while remaining visible.
+- **Ghosting Mode**: Inactive pinned windows become translucent and grayscale, reducing peripheral distractions while maintaining visibility.
 - **Desktop Folders**: Drag and drop windows onto each other to create smart stacks and categorised folders.
-- **Multi-Tab Surfaces**: Browser windows feature a deep-integrated tab architecture, allowing multiple web resources to coexist in a single pinned surface.
+- **Multi-Tab Surfaces**: Browser windows feature a deeply integrated tab architecture, allowing multiple web resources to coexist in a single pinned surface.
 
 ### 🤖 AI-Powered Intelligence
 PinPointPro is designed to work with **any AI provider**. We recommend [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) as the preferred provider, but you can plug in any OpenAI-compatible API.
@@ -56,7 +56,7 @@ PinPointPro follows the **Invincible UI** framework:
 
 ### Prerequisites
 - An API key from your chosen AI provider. We recommend **Azure OpenAI** — sign up at [azure.microsoft.com](https://azure.microsoft.com/en-us/products/ai-services/openai-service).
-- A modern browser with ES6 module support.
+- A modern browser with ES6 module support (such as the latest versions of Google Chrome, Microsoft Edge, Mozilla Firefox, or Safari).
 
 ### Supported AI Providers
 PinPointPro works with any OpenAI-compatible API. Set the following environment variables:
@@ -152,3 +152,5 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 ---
 
 Built with ❤️ by the PinPoint Community. Stay focused. Stay invincible.
+
+PinPoint is a great community where you learn, relearn and have opportunity of being in a great Team.
