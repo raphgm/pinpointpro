@@ -83,3 +83,9 @@
  - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
  - **Date:** 2026-07-04
  - **One thing I learned:** I learnt how to contribute on an opensource project.
+## WOKOMA NOBLE
+
+- **GitHub:** @noblezee
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2025-07-11
+- **One thing I learned:** I am enjoying learning about DevOps and understanding how Git, GitHub, and collaboration make open-source projects more efficient.
