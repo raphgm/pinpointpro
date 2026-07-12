@@ -154,3 +154,7 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 Built with ❤️ by the PinPoint Community. Stay focused. Stay invincible.
 
 PinPoint is a great community where you learn, relearn and have opportunity of being in a great Team.
+
+## Acknowledgements
+
+Special thanks to all the contributors who continue to improve PinPointPro  through Open-Source collaboration.Every step, every action is deeply appreciated and helps PinPointPro become a better project.
