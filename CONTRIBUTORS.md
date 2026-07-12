@@ -56,6 +56,10 @@
 # - **One thing I learned:** How to fork and contribute to an open source project on GitHuB.
 
 
+## Lotanna Obianefo
+# - **Contribution:** Cloud & DevOps Foundation - Phase 2 Project
+# - **Date:** 2026-07-07
+# - **One thing I Learnt:** I Learnt how to Fork, Clone and Contribute to an OpenSource Repo.
 
 ## Raphael Olaniyi
 # - **GitHub:** @rolaniyia
@@ -69,7 +73,6 @@
  - **Date:** 2026-07-03
  - **One thing I learned:** Learning how to collaborate on GitHub.
 
-## Peter Fadeyi
 
 - **GitHub:** @pirrezz
 - **Contribution:** Cloud & DevOps Foundation - Phase 2 Project
@@ -89,3 +92,13 @@
 - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
 - **Date:** 2025-07-11
 - **One thing I learned:** I am enjoying learning about DevOps and understanding how Git, GitHub, and collaboration make open-source projects more efficient.
+# ## Full Name: Ganiyat Adebayo
+# - **GitHub:** @umuashraf1
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** 2026-07-5
+# - **One thing I learned:** I am learning how to collaborate on  open source project
+## Ijeoma Adesiyan
+**GitHub:** @IjeomaAdesiyan-star 
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2026-07-06
+- **One thing I learned:** I now understand that Git branches provide an isolated workspace for developing new features before merging them into the main project.
