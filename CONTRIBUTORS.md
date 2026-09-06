@@ -102,3 +102,10 @@
 - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
 - **Date:** 2026-07-06
 - **One thing I learned:** I now understand that Git branches provide an isolated workspace for developing new features before merging them into the main project.
+
+## Chinedum Enyi Anderson
+- **GitHub:** @enyichinedumanderson
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2026-09-06
+- **One thing I learned:** I learned how to use the open-source contribution workflow to make changes to a repository and submit them for review through Git and GitHub.
+
