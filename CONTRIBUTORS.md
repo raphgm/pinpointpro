@@ -107,4 +107,4 @@
 **Github:** @kosinachi  
 -- **Contribution:** Cloud & DevOps Foundation - Phase 2 project 
 - **Date:** 2026-08-27  
-- **one thing i learned:** I understand how Git branch works and also how typical workflow on when you want to contribute to someone else's GitHub project, which the step is: Fork - my-GitHub repo - Clone - Vs code - make changes - git add / commit -  git push - The GitHub fork - pull request - Original project
+- **one thing i learned:** I understand how Git branch works and also how typical workflow on when you want to contribute to someone else's GitHub project, which the step is: Fork on my-GitHub repo - Clone - Vs code - make changes - git add / commit -  git push - The GitHub fork - pull request - Original project
