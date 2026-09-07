@@ -102,3 +102,9 @@
 - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
 - **Date:** 2026-07-06
 - **One thing I learned:** I now understand that Git branches provide an isolated workspace for developing new features before merging them into the main project.
+
+## Kosisochukwu Ugochukwu  
+**Github:** @kosinachi  
+- **Contribution:** Cloud & DevOps Foundation - Phase 2 project 
+- **Date:** 2026-08-27  
+- **one thing i learned:** I understand how Git branch works and also the typical workflow on when you want to contribute to someone else's GitHub project.
