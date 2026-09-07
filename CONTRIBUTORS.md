@@ -113,5 +113,5 @@
 ## Kosisochukwu Ugochukwu  
 **Github:** @kosinachi  
 - **Contribution:** Cloud & DevOps Foundation - Phase 2 project 
-- **Date:** 2026-08-27  
-- **one thing i learned:** I understand how Git branch works and also the typical workflow on when you want to contribute to someone else's GitHub project.
+- **Date:** 2026-08-26  
+- **one thing i learned:** I'm familiar now on how Git branching works, as well as the standard process for contributing to another person's GitHub repository or an open source project.
