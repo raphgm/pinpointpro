@@ -2,7 +2,7 @@
 
 > **The Open-Source "Invincible UI" Window Manager & Productivity Surface.**
 
-PinPoint Pro is a high-performance, context-aware digital workspace designed for deep work. It transforms your browser or desktop environment into a "pinned" productivity surface, using AI to intelligently manage window layouts, categorise research, and provide semantic search across your entire workspace.
+PinPointPro is a high-performance, context-aware digital workspace designed for deep work. It transforms your browser or desktop environment into a "pinned" productivity surface, using AI to intelligently manage window layouts, categorize research, and provide semantic search across your entire workspace.
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Version: 1.0.0-beta](https://img.shields.io/badge/Version-1.0.0--beta-green)
@@ -16,14 +16,14 @@ PinPoint Pro is a high-performance, context-aware digital workspace designed for
 ### 🪟 Advanced Window Management
 - **Smart Pinning**: Pin any window to stay on top of your workflow.
 - **Ghosting Mode**: Inactive pinned windows become translucent and grayscale, reducing peripheral distractions while maintaining visibility.
-- **Desktop Folders**: Drag and drop windows onto each other to create smart stacks and categorised folders.
+- **Desktop Folders**: Drag and drop windows onto each other to create smart stacks and categorized folders.
 - **Multi-Tab Surfaces**: Browser windows feature a deeply integrated tab architecture, allowing multiple web resources to coexist in a single pinned surface.
 
 ### 🤖 AI-Powered Intelligence
 PinPointPro is designed to work with **any AI provider**. We recommend [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) as the preferred provider, but you can plug in any OpenAI-compatible API.
 
-- **Ghost Search (⌘K)**: A semantic search engine that understands the *content* of your open windows. Ask "Find that research about LLMs," and PinPoint Pro will highlight the relevant window.
-- **Tab Ingestion**: The Smart Assistant can "sync" your external browser tabs, summarising them and arranging them into logical workspace layouts.
+- **Ghost Search (⌘K)**: A semantic search engine that understands the *content* of your open windows. Ask "Find that research about LLMs," and PinPointPro will highlight the relevant window.
+- **Tab Ingestion**: The Smart Assistant can "sync" your external browser tabs, summarizing them and arranging them into logical workspace layouts.
 - **Layout Orchestration**: Use natural language to tell the Assistant how you want to work (e.g., "Set up my screen for a deep coding session").
 
 ### 🧘 Focus & Zen
@@ -39,7 +39,7 @@ PinPointPro is designed to work with **any AI provider**. We recommend [Azure Op
 PinPointPro follows the **Invincible UI** framework:
 - **Glassmorphism**: High-blur, translucent surfaces that maintain spatial awareness of the background.
 - **Mesh Gradients**: Procedural, flowing backgrounds that shift based on your active "Colour Theme" (Nebula, Sunrise, Ocean, Emerald).
-- **Responsive Motion**: 0.4s cubic-bezier transitions for all window movements, ensuring the interface feels organic and lightweight.
+- **Responsive Motion**: 0.4-second cubic-bezier transitions for all window movements, ensuring the interface feels organic and lightweight.
 
 ---
 
@@ -155,6 +155,6 @@ Special thanks to all the contributors who continue to improve PinPointPro throu
 
 ---
 
-Built with ❤️ by the PinPoint Community. Stay focused. Stay invincible.
+Built with ❤️ by the PinPointPro Community. Stay focused. Stay invincible.
 
-PinPoint is a great community where you learn, relearn and have opportunity of being in a great Team.
+PinPointPro is a great community where can you learn, relearn and have opportunity of being part of a great Team.

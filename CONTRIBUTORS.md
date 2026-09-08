@@ -127,3 +127,8 @@
 # - **Date:** 2026-09-07
 # - **One thing I learned:** Contributing to this repository is one of the fastest ways for me to grow as a developer,it has shifted my mindset from working in isolation to building software as a team.
 
+# ## Olakunle Bayode
+# - **GitHub:** @bayodeolamikunle
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** 2026-09-8
+# - **One thing I learned:** I have learned what it means to contribute to an open-source project, how to fork and clone a Git repository. Contributing to this project has been a real eye-opener for me and it has challenged me to think beyond simply writing code. Also, I have a better understanding of how developers collaborate and contribute to projects that are used by others.
