@@ -117,3 +117,31 @@
  
  
 
+## Kosisochukwu Ugochukwu
+- **GitHub:** @kosinachi
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2026-09-07
+- **One thing I learned:** I'm familiar now on how Git branching works, as well as the standard process for contributing to another person's GitHub repository or in an open source project. 
+
+# ## Hamzat Qudus Kayode
+# - **GitHub:** @PRINCEKAY02
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** 2026-09-07
+# - **One thing I learned:** I now understand why forking a Github repository is important when contributing to an open source project. If I dont have permission to push directly to the original repository, I can fork it to my Github account, make my changes there and then submit a Pull Request to the original repository.
+#
+## Ifeoma Nwafor
+# - **GitHub:** @Usonwa77
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** 2026-09-07
+# - **One thing I learned:** Contributing to this repository is one of the fastest ways for me to grow as a developer,it has shifted my mindset from working in isolation to building software as a team.
+
+# ## Adegbola Adeniyi
+# - **GitHub:** @niyexdroid
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project [Feat: Added a dark and light mode with color picker for the buttons,widget, etc]
+# - **Date:** 2026-09-09
+# - **One thing I learned:** Always remember to checkout your branch or switch your branch so it can be recognized by the upstream.
+# ## Olakunle Bayode
+# - **GitHub:** @bayodeolamikunle
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** 2026-09-8
+# - **One thing I learned:** I have learned what it means to contribute to an open-source project, how to fork and clone a Git repository. Contributing to this project has been a real eye-opener for me and it has challenged me to think beyond simply writing code. Also, I have a better understanding of how developers collaborate and contribute to projects that are used by others.
