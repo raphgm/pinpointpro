@@ -127,3 +127,8 @@
 # - **Date:** 2026-09-07
 # - **One thing I learned:** Contributing to this repository is one of the fastest ways for me to grow as a developer,it has shifted my mindset from working in isolation to building software as a team.
 
+# ## Adegbola Adeniyi
+# - **GitHub:** @niyexdroid
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project [Feat: Added a dark and light mode with color picker for the buttons,widget, etc]
+# - **Date:** 2026-09-09
+# - **One thing I learned:** Always remember to checkout your branch or switch your branch so it can be recognized by the upstream.
