@@ -14,6 +14,9 @@ interface Props {
   onNavigateTab: (pinId: string, tabId: string, url: string) => void;
 }
 
+const isElectron =
+  typeof window !== "undefined" && !!(window as any).pinpoint?.isElectron;
+
 const normalizeUrl = (raw: string) => {
   const trimmed = raw.trim();
   if (!trimmed) return "";
@@ -149,23 +152,34 @@ const PinDetail: React.FC<Props> = ({
 
             <div className="flex-1 min-h-0 bg-white">
               {activeTab?.url ? (
-                <iframe
-                  key={`${activeTab.id}-${reloadKey}`}
-                  src={activeTab.url}
-                  title={activeTab.title}
-                  className="w-full h-full border-0"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                  referrerPolicy="no-referrer"
-                />
+                isElectron ? (
+                  // @ts-ignore -- webview is an Electron-only element
+                  <webview
+                    key={`${activeTab.id}-${reloadKey}`}
+                    src={activeTab.url}
+                    className="w-full h-full"
+                  />
+                ) : (
+                  <iframe
+                    key={`${activeTab.id}-${reloadKey}`}
+                    src={activeTab.url}
+                    title={activeTab.title}
+                    className="w-full h-full border-0"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    referrerPolicy="no-referrer"
+                  />
+                )
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-sm text-app-tertiary">
                   Enter a URL above to load a page.
                 </div>
               )}
             </div>
-            <p className="px-3 py-1.5 text-[10px] text-app-tertiary border-t border-app shrink-0">
-              Some sites block embedding (X-Frame-Options) and won't load here.
-            </p>
+            {!isElectron && (
+              <p className="px-3 py-1.5 text-[10px] text-app-tertiary border-t border-app shrink-0">
+                Some sites block embedding (X-Frame-Options) and won't load here.
+              </p>
+            )}
           </>
         ) : (
           <div className="flex-1 overflow-y-auto p-5">
