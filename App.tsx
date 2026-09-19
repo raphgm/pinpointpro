@@ -1,377 +1,267 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  IndicatorStyle,
-  WindowState,
-  Workspace,
-  UserPreferences,
-  TabData,
-  ColorTheme,
-  FocusTimerState,
+  Pin,
   TodoItem,
   Priority,
-  SoundscapeType,
+  UserPreferences,
+  FocusTimerState,
 } from "./types";
-import StatusBar from "./StatusBar";
-import Desktop from "./Desktop";
-import Onboarding from "./Onboarding";
+import Sidebar from "./Sidebar";
+import TopBar from "./TopBar";
+import PinCard from "./PinCard";
+import PinDetail from "./PinDetail";
+import CommandPalette from "./CommandPalette";
 import PreferencesModal from "./PreferencesModal";
-import WorkspaceManager from "./WorkspaceManager";
-import SmartAssistant from "./SmartAssistant";
-import GhostSearch from "./GhostSearch";
-import EchoAssistant from "./EchoAssistant";
+import Onboarding from "./Onboarding";
 import { GoogleGenAI, Type } from "@google/genai";
 import { soundscapeEngine } from "./soundscapeEngine";
-
-const THEME_ACCENTS: Record<ColorTheme, string> = {
-  nebula: "#3b82f6",
-  sunrise: "#f97316",
-  ocean: "#06b6d4",
-  emerald: "#10b981",
-};
+import { Plus } from "lucide-react";
 
 const DEFAULT_PREFERENCES: UserPreferences = {
-  launchAtLogin: false,
-  showMenuBarIcon: true,
-  indicatorStyle: IndicatorStyle.COLORED_GLOW,
-  accentColor: "#3b82f6",
+  accentColor: "#6366f1",
   theme: "dark",
-  minOpacity: 0.4,
-  zenMode: false,
-  ghostingEnabled: true,
-  colorTheme: "nebula",
   soundscape: "none",
-  snapZonesEnabled: true,
-  shortcuts: {
-    pin: "p",
-    transparency: "t",
-    focus: "f",
-    workspace: "w",
-    zen: "z",
-    search: "k",
-  },
 };
 
-const INITIAL_WINDOWS: WindowState[] = [
+const INITIAL_PINS: Pin[] = [
   {
-    id: "w1",
+    id: "p1",
     title: "Research Project",
-    type: "browser",
-    x: 350,
-    y: 100,
-    width: 600,
-    height: 450,
-    isPinned: true,
-    opacity: 1,
-    focusCount: 8,
+    type: "tabs",
     content: "Deep dive into the architecture of modern LLMs.",
+    category: "AI Research",
+    isPinned: true,
+    isArchived: false,
+    focusCount: 8,
+    createdAt: Date.now(),
     tabs: [
       {
         id: "t1",
-        title: "Gemini Technical Paper",
-        url: "deepmind.google/gemini",
+        title: "Example Domain",
+        url: "https://example.com",
         isActive: true,
-        category: "AI Research",
-        lastAccessed: Date.now(),
       },
       {
         id: "t2",
-        title: "React Performance Tips",
-        url: "react.dev/learn",
+        title: "First Website Ever",
+        url: "https://info.cern.ch",
         isActive: false,
-        category: "Dev Docs",
-        lastAccessed: Date.now() - 10000,
       },
       {
         id: "t3",
-        title: "Window Management UX",
-        url: "nngroup.com",
+        title: "W3C",
+        url: "https://www.w3.org",
         isActive: false,
-        category: "Design",
-        lastAccessed: Date.now() - 20000,
       },
     ],
   },
   {
-    id: "w2",
+    id: "p2",
     title: "Focus Space",
-    type: "notes",
-    x: 800,
-    y: 400,
-    width: 300,
-    height: 300,
-    isPinned: false,
-    opacity: 1,
-    focusCount: 3,
+    type: "note",
     content: "Goal: Finish the multi-tab architecture by end of day.",
-  },
-  {
-    id: "w3",
-    title: "Creative Canvas",
-    type: "canvas",
-    x: 100,
-    y: 180,
-    width: 320,
-    height: 380,
     isPinned: false,
-    opacity: 1,
-    isClosed: true,
-    focusCount: 1,
-    content: "Generative mood board.",
-    canvasData: {
-      prompt:
-        "A futuristic digital workspace with floating holographic screens in Nebula colors",
-      imageUrl: "",
-      isGenerating: false,
-    },
+    isArchived: false,
+    focusCount: 3,
+    createdAt: Date.now(),
   },
 ];
+
+type View = "today" | "pins" | "vault";
 
 const App: React.FC = () => {
   const [isOnboarding, setIsOnboarding] = useState(true);
   const [preferences, setPreferences] =
     useState<UserPreferences>(DEFAULT_PREFERENCES);
-  const [windows, setWindows] = useState<WindowState[]>(INITIAL_WINDOWS);
+  const [pins, setPins] = useState<Pin[]>(INITIAL_PINS);
   const [todos, setTodos] = useState<TodoItem[]>([]);
-  const [archivedTabs, setArchivedTabs] = useState<TabData[]>([]);
-  const [activeWindowId, setActiveWindowId] = useState<string | null>(null);
-  const [isPreferencesOpen, setIsPreferencesOpen] = useState(false);
-  const [isWorkspaceManagerOpen, setIsWorkspaceManagerOpen] = useState(false);
-  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  const [isEchoOpen, setIsEchoOpen] = useState(false);
+  const [view, setView] = useState<View>("today");
+  const [openPinId, setOpenPinId] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
-  const [isMobile, setIsMobile] = useState(false);
-  const [globalWallpaper, setGlobalWallpaper] = useState<string | null>(null);
+  const [isPrefsOpen, setIsPrefsOpen] = useState(false);
+  const [isStacking, setIsStacking] = useState(false);
 
   const [focusTimer, setFocusTimer] = useState<FocusTimerState>({
     isActive: false,
     timeLeft: 25 * 60,
+    duration: 25 * 60,
     mode: "focus",
   });
 
-  const [soundscapeVolume, setSoundscapeVolume] = useState(0.5);
-
-  // Soundscape audio controller
   useEffect(() => {
-    if (preferences.soundscape && preferences.soundscape !== "none") {
+    if (preferences.soundscape !== "none") {
       soundscapeEngine.start(preferences.soundscape);
     } else {
       soundscapeEngine.stop();
     }
-    return () => {
-      soundscapeEngine.stop();
-    };
+    return () => soundscapeEngine.stop();
   }, [preferences.soundscape]);
 
-  // Sync volume changes
   useEffect(() => {
-    soundscapeEngine.setVolume(soundscapeVolume);
-  }, [soundscapeVolume]);
-
-  // Timer Tick
-  useEffect(() => {
-    let interval: any;
-    if (focusTimer.isActive && focusTimer.timeLeft > 0) {
-      interval = setInterval(() => {
-        setFocusTimer((prev) => ({ ...prev, timeLeft: prev.timeLeft - 1 }));
-      }, 1000);
-    } else if (focusTimer.timeLeft === 0) {
-      setFocusTimer((prev) => ({ ...prev, isActive: false }));
-    }
-    return () => clearInterval(interval);
+    if (!focusTimer.isActive || focusTimer.timeLeft <= 0) return;
+    const id = setInterval(() => {
+      setFocusTimer((prev) =>
+        prev.timeLeft <= 1
+          ? { ...prev, timeLeft: 0, isActive: false }
+          : { ...prev, timeLeft: prev.timeLeft - 1 },
+      );
+    }, 1000);
+    return () => clearInterval(id);
   }, [focusTimer.isActive, focusTimer.timeLeft]);
 
-  // Handle Responsiveness
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, []);
 
   const toggleFocusTimer = () =>
     setFocusTimer((prev) => ({ ...prev, isActive: !prev.isActive }));
 
-  const updateWindowPosition = useCallback(
-    (id: string, x: number, y: number) => {
-      if (isMobile) return;
-      setWindows((prev) =>
-        prev.map((w) => {
-          if (w.id !== id) return w;
-          if (w.preSnapDimensions) {
-            const pre = w.preSnapDimensions;
-            return {
-              ...w,
-              x: x + (w.width - pre.width) / 2,
-              y,
-              width: pre.width,
-              height: pre.height,
-              preSnapDimensions: undefined,
-            };
-          }
-          return { ...w, x, y };
-        }),
-      );
-    },
-    [isMobile],
-  );
-
-  const handleSnapWindow = useCallback(
-    (id: string, snapType: "left" | "right" | "top" | "bottom" | "none") => {
-      if (isMobile) return;
-      setWindows((prev) =>
-        prev.map((w) => {
-          if (w.id !== id) return w;
-
-          const width = window.innerWidth;
-          const height = window.innerHeight;
-          const statusBarHeight = 32; // pt-8 is 32px
-          const desktopHeight = height - statusBarHeight;
-
-          if (snapType === "none") return w;
-
-          const preSnapDimensions = w.preSnapDimensions || {
-            x: w.x,
-            y: w.y,
-            width: w.width,
-            height: w.height,
-          };
-
-          if (snapType === "left") {
-            return {
-              ...w,
-              x: 0,
-              y: statusBarHeight,
-              width: width / 2,
-              height: desktopHeight,
-              isPinned: true,
-              preSnapDimensions,
-            };
-          } else if (snapType === "right") {
-            return {
-              ...w,
-              x: width / 2,
-              y: statusBarHeight,
-              width: width / 2,
-              height: desktopHeight,
-              isPinned: true,
-              preSnapDimensions,
-            };
-          } else if (snapType === "top") {
-            return {
-              ...w,
-              x: 0,
-              y: statusBarHeight,
-              width: width,
-              height: desktopHeight,
-              isPinned: true,
-              preSnapDimensions,
-            };
-          } else if (snapType === "bottom") {
-            return {
-              ...w,
-              x: 0,
-              y: statusBarHeight + desktopHeight / 2,
-              width: width,
-              height: desktopHeight / 2,
-              isPinned: true,
-              preSnapDimensions,
-            };
-          }
-          return w;
-        }),
-      );
-    },
-    [isMobile],
-  );
-
   const togglePin = useCallback((id: string) => {
-    setWindows((prev) =>
-      prev.map((w) => (w.id === id ? { ...w, isPinned: !w.isPinned } : w)),
+    setPins((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, isPinned: !p.isPinned } : p)),
     );
   }, []);
 
-  const handleGenerateCanvas = useCallback(
-    async (id: string, prompt: string) => {
-      setWindows((prev) =>
-        prev.map((w) =>
-          w.id === id
-            ? {
-                ...w,
-                canvasData: { ...w.canvasData, isGenerating: true, prompt },
-              }
-            : w,
-        ),
-      );
+  const archivePin = useCallback((id: string) => {
+    setPins((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, isArchived: true } : p)),
+    );
+  }, []);
 
-      try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash-image",
-          contents: { parts: [{ text: prompt }] },
-          config: { imageConfig: { aspectRatio: "1:1" } },
-        });
+  const restorePin = useCallback((id: string) => {
+    setPins((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, isArchived: false } : p)),
+    );
+  }, []);
 
-        let imageUrl = "";
-        for (const part of response.candidates?.[0]?.content?.parts || []) {
-          if (part.inlineData) {
-            imageUrl = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
-            break;
-          }
+  const openPin = useCallback((id: string) => {
+    setOpenPinId(id);
+    setPins((prev) =>
+      prev.map((p) =>
+        p.id === id ? { ...p, focusCount: p.focusCount + 1 } : p,
+      ),
+    );
+  }, []);
+
+  const updatePinContent = useCallback((id: string, content: string) => {
+    setPins((prev) => prev.map((p) => (p.id === id ? { ...p, content } : p)));
+  }, []);
+
+  const switchTab = useCallback((pinId: string, tabId: string) => {
+    setPins((prev) =>
+      prev.map((p) => {
+        if (p.id !== pinId || !p.tabs) return p;
+        return {
+          ...p,
+          tabs: p.tabs.map((t) => ({ ...t, isActive: t.id === tabId })),
+        };
+      }),
+    );
+  }, []);
+
+  const navigateTab = useCallback((pinId: string, tabId: string, url: string) => {
+    setPins((prev) =>
+      prev.map((p) => {
+        if (p.id !== pinId || !p.tabs) return p;
+        return {
+          ...p,
+          tabs: p.tabs.map((t) =>
+            t.id === tabId
+              ? { ...t, url, title: t.title || url, lastAccessed: Date.now() }
+              : t,
+          ),
+        };
+      }),
+    );
+  }, []);
+
+  const addTab = useCallback((pinId: string, url: string) => {
+    setPins((prev) =>
+      prev.map((p) => {
+        if (p.id !== pinId) return p;
+        const newTab = {
+          id: `tab-${Date.now()}`,
+          title: url.replace(/^https?:\/\//, ""),
+          url,
+          isActive: true,
+          lastAccessed: Date.now(),
+        };
+        return {
+          ...p,
+          tabs: [...(p.tabs || []).map((t) => ({ ...t, isActive: false })), newTab],
+        };
+      }),
+    );
+  }, []);
+
+  const closeTab = useCallback((pinId: string, tabId: string) => {
+    setPins((prev) =>
+      prev.map((p) => {
+        if (p.id !== pinId || !p.tabs) return p;
+        const filtered = p.tabs.filter((t) => t.id !== tabId);
+        if (filtered.length > 0 && !filtered.some((t) => t.isActive)) {
+          filtered[0].isActive = true;
         }
+        return { ...p, tabs: filtered };
+      }),
+    );
+  }, []);
 
-        setWindows((prev) =>
-          prev.map((w) =>
-            w.id === id
-              ? {
-                  ...w,
-                  canvasData: {
-                    ...w.canvasData,
-                    isGenerating: false,
-                    imageUrl,
-                    prompt,
-                  },
-                }
-              : w,
-          ),
-        );
-      } catch (e) {
-        console.error("Canvas Generation Failed:", e);
-        setWindows((prev) =>
-          prev.map((w) =>
-            w.id === id
-              ? { ...w, canvasData: { ...w.canvasData, isGenerating: false } }
-              : w,
-          ),
-        );
-      }
-    },
-    [],
-  );
+  const addIntention = useCallback((text: string, priority: Priority = "medium") => {
+    setTodos((prev) => [
+      { id: `t-${Date.now()}`, text, priority, completed: false, createdAt: Date.now() },
+      ...prev,
+    ]);
+  }, []);
 
-  const handleApplyWallpaper = useCallback((imageUrl: string) => {
-    setGlobalWallpaper(imageUrl);
+  const addNotePin = useCallback(() => {
+    const newPin: Pin = {
+      id: `p-${Date.now()}`,
+      title: "New Note",
+      type: "note",
+      content: "",
+      isPinned: false,
+      isArchived: false,
+      focusCount: 0,
+      createdAt: Date.now(),
+    };
+    setPins((prev) => [newPin, ...prev]);
+    setOpenPinId(newPin.id);
+  }, []);
+
+  const addBrowserPin = useCallback(() => {
+    const newPin: Pin = {
+      id: `p-${Date.now()}`,
+      title: "New Tab Group",
+      type: "tabs",
+      content: "",
+      isPinned: false,
+      isArchived: false,
+      focusCount: 0,
+      createdAt: Date.now(),
+      tabs: [
+        { id: `tab-${Date.now()}`, title: "New Tab", url: "", isActive: true },
+      ],
+    };
+    setPins((prev) => [newPin, ...prev]);
+    setOpenPinId(newPin.id);
   }, []);
 
   const handleSmartStack = useCallback(
-    async (windowId: string) => {
-      const targetWindow = windows.find((w) => w.id === windowId);
-      if (!targetWindow || !targetWindow.tabs || targetWindow.tabs.length < 2)
-        return;
-
+    async (pinId: string) => {
+      const pin = pins.find((p) => p.id === pinId);
+      if (!pin?.tabs || pin.tabs.length < 2) return;
+      setIsStacking(true);
       try {
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        const tabData = targetWindow.tabs.map((t) => ({
-          id: t.id,
-          title: t.title,
-        }));
-
+        const tabData = pin.tabs.map((t) => ({ id: t.id, title: t.title }));
         const response = await ai.models.generateContent({
           model: "gemini-3-flash-preview",
           contents: `Categorize these browser tabs into logical groups. Return a JSON array of objects with "id" and "category" (max 2 words). Tabs: ${JSON.stringify(tabData)}`,
@@ -390,15 +280,13 @@ const App: React.FC = () => {
             },
           },
         });
-
         const categories = JSON.parse(response.text || "[]");
-
-        setWindows((prev) =>
-          prev.map((w) => {
-            if (w.id !== windowId || !w.tabs) return w;
+        setPins((prev) =>
+          prev.map((p) => {
+            if (p.id !== pinId || !p.tabs) return p;
             return {
-              ...w,
-              tabs: w.tabs.map((t) => {
+              ...p,
+              tabs: p.tabs.map((t) => {
                 const cat = categories.find((c: any) => c.id === t.id);
                 return cat ? { ...t, category: cat.category } : t;
               }),
@@ -406,406 +294,150 @@ const App: React.FC = () => {
           }),
         );
       } catch (e) {
-        console.error("Smart Stack Failed:", e);
+        console.error("Smart Stack failed:", e);
+      } finally {
+        setIsStacking(false);
       }
     },
-    [windows],
-  );
-
-  const handleSwitchTab = useCallback((windowId: string, tabId: string) => {
-    setWindows((prev) =>
-      prev.map((w) => {
-        if (w.id !== windowId || !w.tabs) return w;
-        return {
-          ...w,
-          tabs: w.tabs.map((t) => ({
-            ...t,
-            isActive: t.id === tabId,
-            lastAccessed: t.id === tabId ? Date.now() : t.lastAccessed,
-          })),
-        };
-      }),
-    );
-  }, []);
-
-  const handleUpdateTabCategory = useCallback(
-    (windowId: string, tabId: string, category: string) => {
-      setWindows((prev) =>
-        prev.map((w) => {
-          if (w.id !== windowId || !w.tabs) return w;
-          return {
-            ...w,
-            tabs: w.tabs.map((t) => (t.id === tabId ? { ...t, category } : t)),
-          };
-        }),
-      );
-    },
-    [],
-  );
-
-  const handleAddTab = useCallback((windowId: string) => {
-    setWindows((prev) =>
-      prev.map((w) => {
-        if (w.id !== windowId) return w;
-        const newTab: TabData = {
-          id: `tab-${Date.now()}`,
-          title: "New Surface",
-          url: "pinpoint.internal/new",
-          isActive: true,
-          lastAccessed: Date.now(),
-        };
-        return {
-          ...w,
-          tabs: [
-            ...(w.tabs || []).map((t) => ({ ...t, isActive: false })),
-            newTab,
-          ],
-        };
-      }),
-    );
-  }, []);
-
-  const handleCloseTab = useCallback((windowId: string, tabId: string) => {
-    setWindows((prev) =>
-      prev.map((w) => {
-        if (w.id !== windowId || !w.tabs) return w;
-        const tabToArchive = w.tabs.find((t) => t.id === tabId);
-        if (tabToArchive) {
-          setArchivedTabs((prevArchive) => [
-            tabToArchive,
-            ...prevArchive.slice(0, 19),
-          ]);
-        }
-        const filteredTabs = w.tabs.filter((t) => t.id !== tabId);
-        if (filteredTabs.length > 0 && !filteredTabs.some((t) => t.isActive)) {
-          filteredTabs[0].isActive = true;
-        }
-        return { ...w, tabs: filteredTabs };
-      }),
-    );
-  }, []);
-
-  const handleCloseWindow = useCallback((id: string) => {
-    setWindows((prev) =>
-      prev.map((w) => (w.id === id ? { ...w, isClosed: true } : w)),
-    );
-  }, []);
-
-  const handleRestoreWindow = useCallback((id: string) => {
-    setWindows((prev) =>
-      prev.map((w) => (w.id === id ? { ...w, isClosed: false } : w)),
-    );
-  }, []);
-
-  const handleToggleCollapseWindow = useCallback((id: string) => {
-    setWindows((prev) =>
-      prev.map((w) =>
-        w.id === id ? { ...w, isCollapsed: !w.isCollapsed } : w,
-      ),
-    );
-  }, []);
-
-  const handleSetActiveWindowId = useCallback((id: string | null) => {
-    setActiveWindowId(id);
-    if (id) {
-      setWindows((prev) =>
-        prev.map((w) =>
-          w.id === id ? { ...w, focusCount: (w.focusCount || 0) + 1 } : w,
-        ),
-      );
-    }
-  }, []);
-
-  const handleDesktopTidy = useCallback(() => {
-    setWindows((prev) => {
-      const visibleWindows = prev.filter((w) => !w.isClosed);
-      if (visibleWindows.length === 0) return prev;
-
-      // Sort by focusCount (usage frequency) descending
-      const sorted = [...visibleWindows].sort((a, b) => {
-        const countA = a.focusCount || 0;
-        const countB = b.focusCount || 0;
-        if (countB !== countA) return countB - countA;
-        return a.id.localeCompare(b.id);
-      });
-
-      const screenWidth = window.innerWidth || 1200;
-      const screenHeight = window.innerHeight || 800;
-
-      const centerWidth = Math.max(500, Math.min(680, screenWidth * 0.55));
-      const centerHeight = Math.max(380, Math.min(500, screenHeight * 0.6));
-      const centerX = (screenWidth - centerWidth) / 2;
-      const centerY = (screenHeight - centerHeight) / 2 + 10;
-
-      const mostActive = sorted[0];
-      const others = sorted.slice(1);
-
-      return prev.map((w) => {
-        if (w.isClosed) return w;
-
-        if (w.id === mostActive.id) {
-          return {
-            ...w,
-            x: centerX,
-            y: centerY,
-            width: centerWidth,
-            height: centerHeight,
-            isPinned: true,
-            isCollapsed: false,
-          };
-        }
-
-        const index = others.findIndex((o) => o.id === w.id);
-        if (index === -1) return w;
-
-        const isLeft = index % 2 === 0;
-        const sideIndex = Math.floor(index / 2);
-        const totalOnSide = Math.ceil(others.length / 2);
-
-        const sideWidth = Math.max(
-          280,
-          Math.min(320, (screenWidth - centerWidth) / 2 - 30),
-        );
-        const sideX = isLeft
-          ? Math.max(20, (centerX - sideWidth) / 2)
-          : Math.min(
-              screenWidth - sideWidth - 20,
-              centerX +
-                centerWidth +
-                (screenWidth - (centerX + centerWidth) - sideWidth) / 2,
-            );
-
-        const availableHeight = screenHeight - 120;
-        const sideHeight = Math.min(260, availableHeight / totalOnSide - 20);
-        const startY = 70;
-        const sideY = startY + sideIndex * (sideHeight + 15);
-
-        return {
-          ...w,
-          x: sideX,
-          y: sideY,
-          width: sideWidth,
-          height: sideHeight,
-          isPinned: false,
-          isCollapsed: false,
-        };
-      });
-    });
-
-    setWindows((prev) => {
-      const visibleWindows = prev.filter((w) => !w.isClosed);
-      if (visibleWindows.length > 0) {
-        const sorted = [...visibleWindows].sort((a, b) => {
-          const countA = a.focusCount || 0;
-          const countB = b.focusCount || 0;
-          if (countB !== countA) return countB - countA;
-          return a.id.localeCompare(b.id);
-        });
-        setActiveWindowId(sorted[0].id);
-      }
-      return prev;
-    });
-  }, []);
-
-  const handleRestoreTab = useCallback(
-    (tab: TabData) => {
-      // Restore to currently active window or first browser window
-      setWindows((prev) => {
-        let targetId =
-          activeWindowId || prev.find((w) => w.type === "browser")?.id;
-        if (!targetId) return prev;
-
-        return prev.map((w) => {
-          if (w.id !== targetId) return w;
-          return {
-            ...w,
-            tabs: [
-              ...(w.tabs || []).map((t) => ({ ...t, isActive: false })),
-              { ...tab, isActive: true, lastAccessed: Date.now() },
-            ],
-          };
-        });
-      });
-      setArchivedTabs((prev) => prev.filter((t) => t.id !== tab.id));
-    },
-    [activeWindowId],
-  );
-
-  const addIntention = useCallback(
-    (text: string, priority: Priority = "medium") => {
-      setTodos((prev) => [
-        {
-          id: `t-${Date.now()}`,
-          text,
-          priority,
-          completed: false,
-          createdAt: Date.now(),
-        },
-        ...prev,
-      ]);
-    },
-    [],
+    [pins],
   );
 
   if (isOnboarding) {
-    return (
-      <Onboarding
-        onComplete={() => setIsOnboarding(false)}
-        preferences={preferences}
-        setPreferences={setPreferences}
-      />
-    );
+    return <Onboarding onComplete={() => setIsOnboarding(false)} />;
   }
+
+  const visiblePins =
+    view === "vault"
+      ? pins.filter((p) => p.isArchived)
+      : view === "pins"
+        ? pins.filter((p) => !p.isArchived)
+        : pins.filter((p) => !p.isArchived && p.isPinned);
+
+  const openPinObj = pins.find((p) => p.id === openPinId) || null;
 
   return (
     <div
       data-theme={preferences.theme}
-      className={`relative w-screen h-screen overflow-hidden select-none theme-${preferences.colorTheme} ${preferences.theme === "light" ? "bg-slate-100 text-slate-900" : "bg-slate-900 text-white"} ${isMobile ? "is-mobile" : ""} ${focusTimer.isActive ? "focus-mode-active" : ""}`}
+      className="w-screen h-screen flex overflow-hidden bg-app text-app-primary"
       style={{ "--accent": preferences.accentColor } as React.CSSProperties}
     >
-      <StatusBar
-        pinnedCount={windows.filter((w) => w.isPinned).length}
-        focusMode={preferences.zenMode}
-        currentTheme={preferences.colorTheme}
-        theme={preferences.theme}
-        onToggleTheme={() =>
-          setPreferences((p) => ({
-            ...p,
-            theme: p.theme === "dark" ? "light" : "dark",
-          }))
-        }
-        accentColor={preferences.accentColor}
-        onAccentChange={(color) =>
-          setPreferences((p) => ({ ...p, accentColor: color }))
-        }
-        focusTimer={focusTimer}
-        archivedTabs={archivedTabs}
-        onRestoreTab={handleRestoreTab}
-        onToggleFocusTimer={toggleFocusTimer}
-        onThemeChange={(theme) =>
-          setPreferences((p) => ({ ...p, colorTheme: theme }))
-        }
-        onOpenPrefs={() => setIsPreferencesOpen(true)}
-        onOpenWorkspaces={() => setIsWorkspaceManagerOpen(true)}
-        onOpenAssistant={() => setIsAssistantOpen(true)}
-        onOpenSearch={() => setIsSearchOpen(true)}
-        onOpenEcho={() => setIsEchoOpen(true)}
-        isMobile={isMobile}
-        soundscape={preferences.soundscape}
-        onSoundscapeChange={(sound) =>
-          setPreferences((p) => ({ ...p, soundscape: sound }))
-        }
-        soundscapeVolume={soundscapeVolume}
-        onSoundscapeVolumeChange={(vol) => setSoundscapeVolume(vol)}
-        closedWindows={windows.filter((w) => w.isClosed)}
-        onRestoreWindow={handleRestoreWindow}
-      />
-
-      <Desktop
-        windows={windows}
+      <Sidebar
+        view={view}
+        onChangeView={setView}
+        pins={pins}
         todos={todos}
-        activeWindowId={activeWindowId}
-        focusMode={preferences.zenMode}
-        preferences={preferences}
-        focusTimerActive={focusTimer.isActive}
-        setActiveWindowId={handleSetActiveWindowId}
-        updateWindowPosition={updateWindowPosition}
-        togglePin={togglePin}
-        updateWindowOpacity={(id, opacity) =>
-          setWindows((prev) =>
-            prev.map((w) => (w.id === id ? { ...w, opacity } : w)),
-          )
-        }
-        onDetachTab={handleCloseTab}
-        onSwitchTab={handleSwitchTab}
-        onUpdateTabCategory={handleUpdateTabCategory}
-        onAddTab={handleAddTab}
-        onCloseTab={handleCloseTab}
-        onGenerateGlance={() => {}}
-        onGenerateCanvas={handleGenerateCanvas}
-        onApplyWallpaper={handleApplyWallpaper}
-        onSmartStack={handleSmartStack}
+        onAddTodo={addIntention}
         onToggleTodo={(id) =>
           setTodos((prev) =>
-            prev.map((t) =>
-              t.id === id ? { ...t, completed: !t.completed } : t,
-            ),
+            prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
           )
         }
-        onAddTodo={addIntention}
-        onDeleteTodo={(id) =>
-          setTodos((prev) => prev.filter((t) => t.id !== id))
-        }
-        onGroupWindows={() => {}}
-        onRemoveFromFolder={() => {}}
-        isMobile={isMobile}
-        globalWallpaper={globalWallpaper}
-        onCloseWindow={handleCloseWindow}
-        onSnapWindow={handleSnapWindow}
-        onToggleCollapseWindow={handleToggleCollapseWindow}
+        onDeleteTodo={(id) => setTodos((prev) => prev.filter((t) => t.id !== id))}
       />
 
-      {isEchoOpen && (
-        <EchoAssistant
-          windows={windows}
-          onClose={() => setIsEchoOpen(false)}
-          commands={{
-            setTimer: (mins) =>
-              setFocusTimer({
-                mode: "focus",
-                timeLeft: mins * 60,
-                isActive: true,
-              }),
-            setTheme: (theme) =>
-              setPreferences((p) => ({
-                ...p,
-                colorTheme: theme as ColorTheme,
-              })),
-            pinWindow: (id) => togglePin(id),
-            addIntention: (text) => addIntention(text),
-            toggleZen: () =>
-              setPreferences((p) => ({ ...p, zenMode: !p.zenMode })),
-            desktopTidy: handleDesktopTidy,
-          }}
+      <div className="flex-1 flex flex-col min-w-0">
+        <TopBar
+          theme={preferences.theme}
+          onToggleTheme={() =>
+            setPreferences((p) => ({
+              ...p,
+              theme: p.theme === "dark" ? "light" : "dark",
+            }))
+          }
+          onOpenSearch={() => setIsSearchOpen(true)}
+          onOpenPrefs={() => setIsPrefsOpen(true)}
+          focusTimer={focusTimer}
+          onToggleFocusTimer={toggleFocusTimer}
+        />
+
+        <main className="flex-1 overflow-y-auto p-6">
+          <div className="flex items-center justify-between mb-5">
+            <h1 className="text-lg font-semibold tracking-tight capitalize">
+              {view === "today" ? "Pinned for today" : view}
+            </h1>
+            {view !== "vault" && (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={addBrowserPin}
+                  className="flex items-center gap-1.5 text-sm font-medium text-app-secondary hover:bg-app-muted px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  <Plus size={14} />
+                  New browser
+                </button>
+                <button
+                  onClick={addNotePin}
+                  className="flex items-center gap-1.5 text-sm font-medium text-app-secondary hover:bg-app-muted px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  <Plus size={14} />
+                  New note
+                </button>
+              </div>
+            )}
+          </div>
+
+          {visiblePins.length === 0 ? (
+            <p className="text-sm text-app-tertiary">
+              {view === "vault" ? "Vault is empty." : "Nothing here yet."}
+            </p>
+          ) : (
+            <div className="grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(220px,1fr))]">
+              {visiblePins.map((pin) =>
+                view === "vault" ? (
+                  <div
+                    key={pin.id}
+                    className="p-4 rounded-xl border border-app bg-surface flex flex-col gap-2"
+                  >
+                    <h3 className="text-sm font-medium truncate">{pin.title}</h3>
+                    <button
+                      onClick={() => restorePin(pin.id)}
+                      className="text-xs text-accent self-start"
+                    >
+                      Restore
+                    </button>
+                  </div>
+                ) : (
+                  <PinCard
+                    key={pin.id}
+                    pin={pin}
+                    onOpen={openPin}
+                    onTogglePin={togglePin}
+                    onArchive={archivePin}
+                  />
+                ),
+              )}
+            </div>
+          )}
+        </main>
+      </div>
+
+      {openPinObj && (
+        <PinDetail
+          pin={openPinObj}
+          onClose={() => setOpenPinId(null)}
+          onUpdateContent={updatePinContent}
+          onSmartStack={handleSmartStack}
+          isStacking={isStacking}
+          onSwitchTab={switchTab}
+          onAddTab={addTab}
+          onCloseTab={closeTab}
+          onNavigateTab={navigateTab}
         />
       )}
-
-      {isAssistantOpen && (
-        <SmartAssistant
-          windows={windows}
-          onApplyLayout={() => {}}
-          onCategorize={() => {}}
-          onSyncTabs={() => {}}
-          onCleanDesktop={handleDesktopTidy}
-          onClose={() => setIsAssistantOpen(false)}
-          isMobile={isMobile}
-        />
-      )}
-
       {isSearchOpen && (
-        <GhostSearch
-          windows={windows}
+        <CommandPalette
+          pins={pins}
           onSelect={(id) => {
-            handleSetActiveWindowId(id);
+            openPin(id);
             setIsSearchOpen(false);
           }}
           onClose={() => setIsSearchOpen(false)}
         />
       )}
-      {isPreferencesOpen && (
+      {isPrefsOpen && (
         <PreferencesModal
           preferences={preferences}
           setPreferences={setPreferences}
-          onClose={() => setIsPreferencesOpen(false)}
-          isMobile={isMobile}
-        />
-      )}
-      {isWorkspaceManagerOpen && (
-        <WorkspaceManager
-          workspaces={workspaces}
-          onSave={() => {}}
-          onRestore={() => {}}
-          onClose={() => setIsWorkspaceManagerOpen(false)}
+          onClose={() => setIsPrefsOpen(false)}
         />
       )}
     </div>

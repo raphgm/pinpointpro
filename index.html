@@ -7,228 +7,144 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <title>PinPoint Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       :root {
-        --nebula-1: #3b82f6;
-        --nebula-2: #9333ea;
-        --nebula-3: #6366f1;
-        --nebula-4: #ec4899;
-        --sunrise-1: #f97316;
-        --sunrise-2: #ef4444;
-        --sunrise-3: #f59e0b;
-        --sunrise-4: #db2777;
-        --ocean-1: #06b6d4;
-        --ocean-2: #0891b2;
-        --ocean-3: #10b981;
-        --ocean-4: #3b82f6;
-        --emerald-1: #10b981;
-        --emerald-2: #059669;
-        --emerald-3: #84cc16;
-        --emerald-4: #06b6d4;
+        --accent: #6366f1;
+        --accent-soft: rgba(99, 102, 241, 0.12);
+
+        --color-app-bg: #f8fafc;
+        --color-surface: #ffffff;
+        --color-elevated: #ffffff;
+        --color-muted: #f1f5f9;
+        --color-muted-hover: #e2e8f0;
+
+        --color-border: #e2e8f0;
+        --color-border-strong: #cbd5e1;
+
+        --color-text-primary: #0f172a;
+        --color-text-secondary: #475569;
+        --color-text-tertiary: #94a3b8;
       }
 
+      [data-theme="dark"] {
+        --accent-soft: rgba(99, 102, 241, 0.18);
+
+        --color-app-bg: #0b0f19;
+        --color-surface: #12172380;
+        --color-surface: #111827;
+        --color-elevated: #1e293b;
+        --color-muted: #1e293b;
+        --color-muted-hover: #293548;
+
+        --color-border: #1f2937;
+        --color-border-strong: #334155;
+
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #94a3b8;
+        --color-text-tertiary: #64748b;
+      }
+
+      * {
+        font-family:
+          "Inter",
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+      }
+
+      html,
       body {
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background-color: #020617;
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          Roboto,
-          "Helvetica Neue",
-          Arial,
-          sans-serif;
-        color: #f8fafc;
-        touch-action: manipulation;
+        background-color: var(--color-app-bg);
+        color: var(--color-text-primary);
       }
 
-      @keyframes gradientFlow {
-        0% {
-          transform: translate(0, 0) rotate(0deg);
-        }
-        50% {
-          transform: translate(5%, 5%) rotate(5deg);
-        }
-        100% {
-          transform: translate(0, 0) rotate(0deg);
-        }
+      .bg-app {
+        background-color: var(--color-app-bg);
       }
-
-      @keyframes reactiveFocus {
-        0% {
-          transform: scale(1) translate(0, 0);
-          opacity: 0.15;
-          filter: blur(120px);
-        }
-        50% {
-          transform: scale(1.1) translate(2%, 2%);
-          opacity: 0.25;
-          filter: blur(80px);
-        }
-        100% {
-          transform: scale(1) translate(0, 0);
-          opacity: 0.15;
-          filter: blur(120px);
-        }
+      .bg-surface {
+        background-color: var(--color-surface);
       }
-
-      .mesh-blob {
-        position: absolute;
-        filter: blur(120px);
-        opacity: 0.15;
-        border-radius: 50%;
-        z-index: 0;
-        animation: gradientFlow 30s infinite ease-in-out;
-        transition:
-          background-color 2s ease,
-          filter 1s ease,
-          opacity 1s ease;
+      .bg-app-elevated {
+        background-color: var(--color-elevated);
       }
-
-      .focus-mode-active .mesh-blob {
-        animation: reactiveFocus 10s infinite ease-in-out;
+      .bg-app-muted {
+        background-color: var(--color-muted);
       }
-
-      .glass {
-        background: rgba(15, 23, 42, 0.6);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+      .hover\:bg-app-muted:hover {
+        background-color: var(--color-muted);
       }
-
-      .shimmer-text {
-        background: linear-gradient(
-          to right,
-          var(--accent-1, #60a5fa) 0%,
-          #f8fafc 50%,
-          var(--accent-1, #60a5fa) 100%
-        );
-        background-size: 200% auto;
-        color: transparent;
-        -webkit-background-clip: text;
-        background-clip: text;
-        animation: shine 12s linear infinite;
+      .hover\:bg-app-muted-hover:hover,
+      .bg-app-muted-hover {
+        background-color: var(--color-muted-hover);
       }
-
-      @keyframes shine {
-        to {
-          background-position: 200% center;
-        }
+      .border-app {
+        border-color: var(--color-border);
       }
-
-      @keyframes softPulse {
-        0%,
-        100% {
-          opacity: 0.8;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.02);
-        }
+      .hover\:border-app-strong:hover {
+        border-color: var(--color-border-strong);
       }
-
-      .aura-pulse {
-        animation: softPulse 4s infinite ease-in-out;
+      .text-app-primary {
+        color: var(--color-text-primary);
+      }
+      .text-app-secondary {
+        color: var(--color-text-secondary);
+      }
+      .text-app-tertiary {
+        color: var(--color-text-tertiary);
+      }
+      .text-accent {
+        color: var(--accent);
+      }
+      .bg-accent-soft {
+        background-color: var(--accent-soft);
+      }
+      .accent-bg {
+        background-color: var(--accent);
+      }
+      .accent-app {
+        accent-color: var(--accent);
       }
 
       ::-webkit-scrollbar {
-        width: 4px;
-        height: 4px;
+        width: 6px;
+        height: 6px;
       }
       ::-webkit-scrollbar-track {
         background: transparent;
       }
       ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--color-border-strong);
         border-radius: 10px;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.1);
-      }
-
       .no-scrollbar::-webkit-scrollbar {
         display: none;
       }
 
-      /* Mobile Overrides */
-      .is-mobile body {
-        overflow-y: auto !important;
+      .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
-
-      @media (max-width: 768px) {
-        .glass {
-          backdrop-filter: blur(10px);
-        }
-      }
-
-      /* Accent color system */
-      :root {
-        --accent: #3b82f6;
-      }
-      .accent-bg {
-        background-color: var(--accent) !important;
-      }
-      .accent-bg-hover:hover {
-        background-color: var(--accent) !important;
-        filter: brightness(1.1);
-      }
-      .accent-text {
-        color: var(--accent) !important;
-      }
-      .accent-border {
-        border-color: var(--accent) !important;
-      }
-      /* Recolor primary blue buttons/widgets to follow the chosen accent */
-      .bg-blue-600 {
-        background-color: var(--accent) !important;
-      }
-
-      /* Light theme overrides */
-      [data-theme="light"] .text-white {
-        color: #0f172a !important;
-      }
-      [data-theme="light"] .text-slate-100,
-      [data-theme="light"] .text-slate-200,
-      [data-theme="light"] .text-slate-300 {
-        color: #334155 !important;
-      }
-      [data-theme="light"] .text-slate-400 {
-        color: #475569 !important;
-      }
-      [data-theme="light"] .text-slate-500 {
-        color: #64748b !important;
-      }
-      [data-theme="light"] .bg-slate-950 {
-        background-color: #f1f5f9 !important;
-      }
-      [data-theme="light"] .bg-slate-900 {
-        background-color: #ffffff !important;
-      }
-      [data-theme="light"] .bg-slate-800 {
-        background-color: #e2e8f0 !important;
-      }
-      [data-theme="light"] .glass {
-        background: rgba(255, 255, 255, 0.75);
-        border-color: rgba(15, 23, 42, 0.08);
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     </style>
-    <script type="importmap">
-      {
-        "imports": {
-          "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-          "react/": "https://esm.sh/react@^19.2.4/",
-          "react": "https://esm.sh/react@^19.2.4",
-          "@google/genai": "https://esm.sh/@google/genai@^1.42.0"
-        }
-      }
-    </script>
-    <link rel="stylesheet" href="/index.css" />
   </head>
   <body>
     <div id="root"></div>
