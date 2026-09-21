@@ -1,3 +1,11 @@
+
+## OMOWUMI, Stephen
+
+- **GitHub:** @Steeve-devops
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2026-09-21
+- **One thing I learned:** I have learnt how to contribute to an open source project on github.
+
 ## BERENICE Enikanoselu
 
 - **GitHub:** @Berenice2425
@@ -146,3 +154,10 @@
 # - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
 # - **Date:** 2026-09-8
 # - **One thing I learned:** I have learned what it means to contribute to an open-source project, how to fork and clone a Git repository. Contributing to this project has been a real eye-opener for me and it has challenged me to think beyond simply writing code. Also, I have a better understanding of how developers collaborate and contribute to projects that are used by others.
+## Stephen Omowumi
+
+- **GitHub:** @Steeve-devops
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2026-09-21
+- **One thing I learned:** I have learnt how to contribute to an open source project on github.
+
