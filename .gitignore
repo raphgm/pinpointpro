@@ -5,4 +5,12 @@ dist/
 .DS_Store
 *.log
 coverage/
+# Local environment variables
+.env
+
+# OS generated files
+.DS_Store
+
+# Node dependencies (if applicable)
+node_modules/
 .next/
