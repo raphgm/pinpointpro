@@ -161,3 +161,8 @@
 - **Date:** 2026-09-21
 - **One thing I learned:** I have learnt how to contribute to an open source project on github.
 
+ ## Jesse Lions
+# - **GitHub:** @jlions
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** YYYY2026-10-DD24
+# - **One thing I learned:** I learnt Open source is important my career
