@@ -114,7 +114,8 @@ API_MODEL=your-model-name
 
 ## 🤝 Contributing
 
-PinPointPro is a community-first open-source project — we welcome contributors of all levels. Whether you are fixing a bug, improving docs, or adding a feature, your contribution matters.
+PinPointPro is a community-first open-source project — we welcome contributors of all levels. Whether you are fixing a bug, improving docs, or adding a feature, your contribution matters alot.
+
 
 1. **Fork** the repo on GitHub.
 2. **Clone** your fork locally:
@@ -155,6 +156,6 @@ Special thanks to all the contributors who continue to improve PinPointPro throu
 
 ---
 
-Built with ❤️ by the PinPointPro Community. Stay focused. Stay invincible.
+Built with ❤️ by the PinPointPro Community. Stay focused. Stay invincible. Stay Relevant.
 
 PinPointPro is a great community where you can learn, relearn, and have the opportunity to be part of a great team.
