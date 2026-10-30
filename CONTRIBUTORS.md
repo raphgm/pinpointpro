@@ -70,10 +70,10 @@
 # - **One thing I Learnt:** I Learnt how to Fork, Clone and Contribute to an OpenSource Repo.
 
 ## Raphael Olaniyi
-# - **GitHub:** @rolaniyia
-# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
-# - **Date:** 2026-06-03
-# - **One thing I learned:** How to fork an open soiurce project and clone a repository non Github. 
+- **GitHub:** @rolaniyia
+- **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+- **Date:** 2026-06-03
+- **One thing I learned:** How to fork an open-source project and clone a repository on GitHub.
 
  ## Emmanuel Khalifa
  - **GitHub:** @Edouble01
