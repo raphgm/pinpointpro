@@ -116,6 +116,7 @@ API_MODEL=your-model-name
 
 PinPointPro is a community-first open-source project — we welcome contributors of all levels. Whether you are fixing a bug, improving docs, or adding a feature, your contribution matters.
 
+
 1. **Fork** the repo on GitHub.
 2. **Clone** your fork locally:
    ```bash

@@ -1,3 +1,4 @@
+import SearchFilterPanel from './components/SearchFilterPanel';
 import React, { useCallback, useEffect, useState } from "react";
 import {
   Pin,
@@ -349,6 +350,8 @@ const App: React.FC = () => {
           focusTimer={focusTimer}
           onToggleFocusTimer={toggleFocusTimer}
         />
+        <SearchFilterPanel />
+
 
         <main className="flex-1 overflow-y-auto p-6">
           <div className="flex items-center justify-between mb-5">
