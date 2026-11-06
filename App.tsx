@@ -428,7 +428,7 @@ const App: React.FC = () => {
       )}
       {isSearchOpen && (
         <CommandPalette
-          pins={pins}j
+          pins={pins}
           onSelect={(id) => {
             openPin(id);
             setIsSearchOpen(false);
