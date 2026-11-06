@@ -166,3 +166,9 @@
 # - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
 # - **Date:** YYYY2026-10-DD24
 # - **One thing I learned:** I learnt Open source is important my career
+
+# ## Enoghase Jeremiah
+# - **GitHub:** @enoghasejeremiah
+# - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
+# - **Date:** 2026-11-06
+# - **One thing I learned:** [I have learnt how to contribute to an open source project on git hub]   
