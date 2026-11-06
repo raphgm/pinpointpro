@@ -350,7 +350,7 @@ const App: React.FC = () => {
           focusTimer={focusTimer}
           onToggleFocusTimer={toggleFocusTimer}
         />
-        <SearchFilterPanel />
+        <SearchFilterPanel pins={pins} onOpen={openPin} />
 
 
         <main className="flex-1 overflow-y-auto p-6">
