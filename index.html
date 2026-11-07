@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>PinPoint Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --accent: #6366f1;
+        --accent-soft: rgba(99, 102, 241, 0.12);
+
+        --color-app-bg: #f8fafc;
+        --color-surface: #ffffff;
+        --color-elevated: #ffffff;
+        --color-muted: #f1f5f9;
+        --color-muted-hover: #e2e8f0;
+
+        --color-border: #e2e8f0;
+        --color-border-strong: #cbd5e1;
+
+        --color-text-primary: #0f172a;
+        --color-text-secondary: #475569;
+        --color-text-tertiary: #94a3b8;
+      }
+
+      [data-theme="dark"] {
+        --accent-soft: rgba(99, 102, 241, 0.18);
+
+        --color-app-bg: #0b0f19;
+        --color-surface: #12172380;
+        --color-surface: #111827;
+        --color-elevated: #1e293b;
+        --color-muted: #1e293b;
+        --color-muted-hover: #293548;
+
+        --color-border: #1f2937;
+        --color-border-strong: #334155;
+
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #94a3b8;
+        --color-text-tertiary: #64748b;
+      }
+
+      * {
+        font-family:
+          "Inter",
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: var(--color-app-bg);
+        color: var(--color-text-primary);
+      }
+
+      .bg-app {
+        background-color: var(--color-app-bg);
+      }
+      .bg-surface {
+        background-color: var(--color-surface);
+      }
+      .bg-app-elevated {
+        background-color: var(--color-elevated);
+      }
+      .bg-app-muted {
+        background-color: var(--color-muted);
+      }
+      .hover\:bg-app-muted:hover {
+        background-color: var(--color-muted);
+      }
+      .hover\:bg-app-muted-hover:hover,
+      .bg-app-muted-hover {
+        background-color: var(--color-muted-hover);
+      }
+      .border-app {
+        border-color: var(--color-border);
+      }
+      .hover\:border-app-strong:hover {
+        border-color: var(--color-border-strong);
+      }
+      .text-app-primary {
+        color: var(--color-text-primary);
+      }
+      .text-app-secondary {
+        color: var(--color-text-secondary);
+      }
+      .text-app-tertiary {
+        color: var(--color-text-tertiary);
+      }
+      .text-accent {
+        color: var(--accent);
+      }
+      .bg-accent-soft {
+        background-color: var(--accent-soft);
+      }
+      .accent-bg {
+        background-color: var(--accent);
+      }
+      .accent-app {
+        accent-color: var(--accent);
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-border-strong);
+        border-radius: 10px;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

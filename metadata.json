@@ -1,0 +1,7 @@
+{
+  "name": "PinPoint Pro",
+  "description": "An open-source, high-performance window management and pinning productivity tool. Built for the community, by the community.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
