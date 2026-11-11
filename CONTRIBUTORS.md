@@ -166,3 +166,9 @@
 # - **Contribution:** Cloud & DevOps Foundation – Phase 2 Project
 # - **Date:** YYYY2026-10-DD24
 # - **One thing I learned:** I learnt Open source is important my career
+
+## Ifeoma Tejiri
+# - **GitHub:** @ifeomatejiri
+# -**Contribution:** Cloud & DevOps Foundation - phase 2 project
+# - **Date:** 2026-11-09 
+# - **One thing I learned:** I learnt that to be a contributor to a GitHub repo, firstly, you search for the repo, fork it, clone it, create a new branch, make your contribution, commit and push your changes, create a pull request and then wait for a review.
